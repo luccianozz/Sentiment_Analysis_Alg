@@ -10,6 +10,7 @@ if sys.version_info[0] < 3:
 else:
     PYTHON3 = True
 
+
 def load_toy_data(path_toy_data):
     """
     Loads the 2D toy dataset as numpy arrays.

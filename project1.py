@@ -324,11 +324,12 @@ def bag_of_words(texts):
     Feel free to change this code as guided by Problem 9
     """
     # Your code here
-    dictionary = {} # maps word to unique index
+    dictionary = {}  # maps word to unique index
+    remove = {"he": 1, "is": 2, "on": 3, "the": 4, "there": 5, "to": 6}
     for text in texts:
         word_list = extract_words(text)
         for word in word_list:
-            if word not in dictionary:
+            if word not in dictionary and word not in remove:
                 dictionary[word] = len(dictionary)
     return dictionary
 
@@ -343,8 +344,6 @@ def extract_bow_feature_vectors(reviews, dictionary):
 
     Feel free to change this code as guided by Problem 9
     """
-    # Your code here
-
     num_reviews = len(reviews)
     feature_matrix = np.zeros([num_reviews, len(dictionary)])
 
@@ -352,7 +351,7 @@ def extract_bow_feature_vectors(reviews, dictionary):
         word_list = extract_words(text)
         for word in word_list:
             if word in dictionary:
-                feature_matrix[i, dictionary[word]] = 1
+                feature_matrix[i, dictionary[word]] += 1
     return feature_matrix
 
 
