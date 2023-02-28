@@ -259,7 +259,7 @@ def classify(feature_matrix, theta, theta_0):
     be considered a positive classification.
     """
     # Your code here
-    raise NotImplementedError
+    return ((np.sum(feature_matrix * theta, axis=1) + theta_0) > 0) * 2 - 1
 
 
 def classifier_accuracy(
@@ -295,7 +295,12 @@ def classifier_accuracy(
     accuracy of the trained classifier on the validation data.
     """
     # Your code here
-    raise NotImplementedError
+    theta, theta_0 = classifier(train_feature_matrix, train_labels, **kwargs)
+    train_predict_labels = classify(train_feature_matrix, theta, theta_0)
+    val_predict_labels = classify(val_feature_matrix, theta, theta_0)
+    train_accuracy = accuracy(train_predict_labels, train_labels)
+    val_accuracy = accuracy(val_predict_labels, val_labels)
+    return train_accuracy, val_accuracy
 
 
 def extract_words(input_string):
